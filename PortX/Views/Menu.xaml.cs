@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PortX
+namespace PortX.Views
 {
     /// <summary>
-    /// Interaction logic for Colors.xaml
+    /// Interaction logic for Menu.xaml
     /// </summary>
-    public partial class Colors : PageFunction<String>
+    public partial class Menu : UserControl
     {
-        public Colors()
+        public Menu()
         {
             InitializeComponent();
         }

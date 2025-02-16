@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PortX.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace PortX
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MenuViewModel();
         }
     }
 }
