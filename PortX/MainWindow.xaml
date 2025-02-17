@@ -13,7 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.75*"/>
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <local:Menu Grid.Row="0"/>
@@ -23,14 +23,47 @@
                     <ToolBar.ItemTemplate>
                         <DataTemplate>
                             <Button Command="{Binding Command}" ToolTip="{Binding Tooltip}">
-                                <materialDesign:PackIcon Kind="{Binding Icon}" Width="24" Height="24" />
+                                <materialDesign:PackIcon Kind="{Binding Icon}" Width="16" Height="16" />
                             </Button>
                         </DataTemplate>
                     </ToolBar.ItemTemplate>
                 </ToolBar>
             </ToolBarTray>
-            <Grid/>
+           
         </DockPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Grid اول برای GroupBox های Send و Recive -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Header="Send Sequens" Margin="10">
+                    <!-- محتوای GroupBox اول -->
+                </GroupBox>
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="5" />
+                <GroupBox Grid.Row="2" Header="Recive Sequens" Margin="10">
+                    <!-- محتوای GroupBox دوم -->
+                </GroupBox>
+
+            </Grid>
+
+            <!-- GridSplitter بین دو ستون -->
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="5" />
+
+            <!-- GroupBox برای Communication -->
+            <GroupBox Grid.Column="2" Header="Communication" Margin="10">
+                <local:MyTabControl/>
+            </GroupBox>
+        </Grid>
 
     </Grid>
 </Window>
