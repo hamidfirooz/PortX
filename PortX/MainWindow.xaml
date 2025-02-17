@@ -3,14 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PortX.Views"
         mc:Ignorable="d"
         Title="PORT X" 
-        d:Height="450"
-        d:Width="800"
-        Height="450" 
-        Width="800">
+        d:Height="768"
+        d:Width="1360"
+        >
     <Grid>
-        <local:Menu />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <local:Menu Grid.Row="0"/>
+        <DockPanel Grid.Row="1">
+            <ToolBarTray DockPanel.Dock="Top">
+                <ToolBar ItemsSource="{Binding ToolbarItems}">
+                    <ToolBar.ItemTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding Command}" ToolTip="{Binding Tooltip}">
+                                <materialDesign:PackIcon Kind="{Binding Icon}" Width="24" Height="24" />
+                            </Button>
+                        </DataTemplate>
+                    </ToolBar.ItemTemplate>
+                </ToolBar>
+            </ToolBarTray>
+            <Grid/>
+        </DockPanel>
+
     </Grid>
 </Window>
