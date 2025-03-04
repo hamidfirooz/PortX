@@ -17,20 +17,8 @@
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         <local:Menu Grid.Row="0"/>
-        <DockPanel Grid.Row="1">
-            <ToolBarTray DockPanel.Dock="Top">
-                <ToolBar ItemsSource="{Binding ToolbarItems}">
-                    <ToolBar.ItemTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding Command}" ToolTip="{Binding Tooltip}">
-                                <materialDesign:PackIcon Kind="{Binding Icon}" Width="16" Height="16" />
-                            </Button>
-                        </DataTemplate>
-                    </ToolBar.ItemTemplate>
-                </ToolBar>
-            </ToolBarTray>
-           
-        </DockPanel>
+        <local:ToolbarView Grid.Row="1"/>
+
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

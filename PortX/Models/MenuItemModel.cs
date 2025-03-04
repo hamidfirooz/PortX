@@ -19,10 +19,4 @@ namespace PortX.Models
             SubItems = new List<MenuItemModel>();
         }
     }
-    public class ToolbarItemModel
-    {
-        public PackIconKind Icon { get; set; }
-        public string Tooltip { get; set; }
-        public ICommand Command { get; set; }
-    }
 }

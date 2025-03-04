@@ -1,5 +1,4 @@
-﻿using PortX.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PortX
+namespace PortX.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SerialPortSettingsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SerialPortSettingsWindow : Window
     {
-        public MainWindow()
+        public SerialPortSettingsWindow()
         {
             InitializeComponent();
-
-            DataContext = new MainViewModel();
         }
+
     }
 }

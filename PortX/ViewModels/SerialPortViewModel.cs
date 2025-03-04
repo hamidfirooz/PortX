@@ -86,6 +86,7 @@ namespace PortX.ViewModels
             OpenPortCommand = new RelayCommand(OpenPort, () => !IsPortOpen);
             ClosePortCommand = new RelayCommand(ClosePort, () => IsPortOpen);
             SendDataCommand = new RelayCommand(SendDataToPort, () => IsPortOpen && !string.IsNullOrEmpty(SendData));
+
         }
 
         private void OpenPort()

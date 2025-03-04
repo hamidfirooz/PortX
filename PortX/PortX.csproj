@@ -85,16 +85,27 @@
     </ApplicationDefinition>
     <Compile Include="CompositeViewModel.cs" />
     <Compile Include="Models\SerialPortModel.cs" />
+    <Compile Include="Models\SerialPortSettingsModel.cs" />
+    <Compile Include="Models\ToolbarItemModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\SerialPortSettingsViewModel.cs" />
     <Compile Include="ViewModels\SerialPortViewModel.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
+    <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="Views\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MyTabControl.xaml.cs">
       <DependentUpon>MyTabControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SerialPortSettingsWindow.xaml.cs">
+      <DependentUpon>SerialPortSettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolbarView.xaml.cs">
+      <DependentUpon>ToolbarView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +124,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MyTabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SerialPortSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ToolbarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,4 @@
-﻿using PortX.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PortX
+namespace PortX.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ToolbarView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ToolbarView : UserControl
     {
-        public MainWindow()
+        public ToolbarView()
         {
             InitializeComponent();
-
-            DataContext = new MainViewModel();
         }
     }
 }
