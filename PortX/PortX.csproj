@@ -85,7 +85,9 @@
     </ApplicationDefinition>
     <Compile Include="CompositeViewModel.cs" />
     <Compile Include="Models\SerialPortModel.cs" />
+    <Compile Include="Models\SerialPortService.cs" />
     <Compile Include="Models\SerialPortSettingsModel.cs" />
+    <Compile Include="Models\TabItemModel.cs" />
     <Compile Include="Models\ToolbarItemModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

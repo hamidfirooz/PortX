@@ -27,5 +27,6 @@ namespace PortX
 
             DataContext = new MainViewModel();
         }
+
     }
 }

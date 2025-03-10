@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -21,6 +23,8 @@ namespace PortX.ViewModels
         private string _receivedData;
         private string _sendData;
         private bool _isPortOpen;
+
+        public SerialPortModel SerialPortModel { get; }
 
         public ObservableCollection<string> AvailablePorts { get; }
 
@@ -57,7 +61,15 @@ namespace PortX.ViewModels
         public string ReceivedData
         {
             get => _receivedData;
-            set => SetProperty(ref _receivedData, value);
+            set
+            {
+                if (_receivedData != value)
+                {
+                    _receivedData = value;
+                    OnPropertyChanged(nameof(ReceivedData));
+                    Console.WriteLine($"ReceivedData Updated: {_receivedData}"); // دیباگ برای بررسی مقداردهی
+                }
+            }
         }
 
         public string SendData
@@ -78,8 +90,10 @@ namespace PortX.ViewModels
 
         public SerialPortViewModel()
         {
+            //_serialPortModel = new SerialPortModel();
+            //_serialPortModel.DataReceived += data => ReceivedData += data;
             _serialPortModel = new SerialPortModel();
-            _serialPortModel.DataReceived += data => ReceivedData += data;
+            _serialPortModel.DataReceived += OnDataReceived;
 
             AvailablePorts = new ObservableCollection<string>(_serialPortModel.GetAvailablePorts());
 
@@ -106,5 +120,13 @@ namespace PortX.ViewModels
         {
             _serialPortModel.SendData(SendData);
         }
+        private void OnDataReceived(string data)
+        {
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                ReceivedData += data + "\n"; // اطمینان از اجرای تغییرات در UI Thread
+            });
+        }
+
     }
 }

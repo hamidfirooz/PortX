@@ -10,7 +10,8 @@
         <local:TabViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TabControl ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab}">
+        <TabControl ItemsSource="{Binding Tabs}"
+            SelectedItem="{Binding SelectedTab}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Header}" />
@@ -18,7 +19,11 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Content}" />
+                    <TextBox Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}"
+                     IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap" />
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

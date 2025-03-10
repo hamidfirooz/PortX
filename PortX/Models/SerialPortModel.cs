@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PortX.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace PortX.Models
     public class SerialPortModel
     {
         private SerialPort _serialPort;
-
         public event Action<string> DataReceived;  // برای ارسال داده‌های دریافتی به ViewModel
 
         public SerialPortModel()
         {
             _serialPort = new SerialPort();
             _serialPort.DataReceived += OnDataReceived;
+
         }
 
         public string[] GetAvailablePorts() => SerialPort.GetPortNames(); // لیست پورت‌ها
@@ -49,11 +50,22 @@ namespace PortX.Models
             if (_serialPort.IsOpen)
                 _serialPort.WriteLine(data);
         }
-
         private void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string receivedData = _serialPort.ReadExisting();
-            DataReceived?.Invoke(receivedData);
+            Console.WriteLine($"Raw Data from Serial Port: {receivedData}"); // دیباگ برای بررسی داده خام
+
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                DataReceived?.Invoke(receivedData);
+            });
         }
+
+        //private void OnDataReceived(object sender, SerialDataReceivedEventArgs e)
+        //{
+        //    string receivedData = _serialPort.ReadExisting();
+        //    DataReceived?.Invoke(receivedData);
+            
+        //}
     }
 }

@@ -4,6 +4,9 @@ using PortX.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +14,37 @@ using System.Windows;
 
 namespace PortX.ViewModels
 {
-    public class ToolbarViewModel
+    public class ToolbarViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<ToolbarItemModel> ToolbarItems { get; set; }
- 
-        SerialPortViewModel serialPortViewModel { get; set; }
+        public SerialPortViewModel SerialPortViewModel { get; set; }
+
+        private PackIconKind _runIcon = PackIconKind.Play;
+        public PackIconKind RunIcon
+        {
+            get => _runIcon;
+            set
+            {
+                _runIcon = value;
+                OnPropertyChanged(nameof(RunIcon));
+            }
+        }
+        private string _receivedData;
+        public string ReceivedData
+        {
+            get => _receivedData;
+            set
+            {
+                _receivedData = value;
+                OnPropertyChanged(nameof(ReceivedData)); // اطلاع به UI
+            }
+        }
         public ToolbarViewModel()
         {
+            SerialPortViewModel = new SerialPortViewModel(); 
+
+            SerialPortViewModel.PropertyChanged += SerialPortViewModel_PropertyChanged;
+            SerialPortViewModel.PropertyChanged += TabViewModel.SerialPortViewModel_PropertyChanged;
 
             ToolbarItems = new ObservableCollection<ToolbarItemModel>
             {
@@ -28,6 +55,8 @@ namespace PortX.ViewModels
                 new ToolbarItemModel { Icon = PackIconKind.Wrench, Tooltip = "Tools", Command = new RelayCommand(OnToolsClicked) },
                 new ToolbarItemModel { Icon = PackIconKind.HelpCircle, Tooltip = "Help", Command = new RelayCommand(OnHelpClicked) }
             };
+
+
         }
 
         private void OnNewFileClicked() { /* کد مربوط به ایجاد فایل جدید */ }
@@ -36,11 +65,64 @@ namespace PortX.ViewModels
         private void OnToolsClicked() { /* نمایش ابزارها */ }
         private void OnHelpClicked() { /* نمایش راهنما */ }
 
+        private void SerialPortViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SerialPortViewModel.IsPortOpen))
+            {
+                RunIcon = SerialPortViewModel.IsPortOpen ? PackIconKind.Stop : PackIconKind.Play;
+                OnPropertyChanged(nameof(RunIcon)); // اطلاع به UI
+            }
+            else if (e.PropertyName == nameof(SerialPortViewModel.ReceivedData))
+            {
+                // فرض می‌کنیم که داده‌های دریافتی در SerialPortViewModel به روز رسانی می‌شوند.
+                ReceivedData = SerialPortViewModel.ReceivedData;
+
+            }
+
+        }
+
+
         private void OnRunClicked()
         {
-            serialPortViewModel.OpenPortCommand.Execute(serialPortViewModel);
-            MessageBox.Show("Run");
+            if (SerialPortViewModel != null && SerialPortViewModel.OpenPortCommand.CanExecute(null))
+            {
+                SerialPortViewModel.SelectedPort = SerialPortViewModel.AvailablePorts.FirstOrDefault(x => x.Equals("COM11"));
+
+                if (string.IsNullOrEmpty(SerialPortViewModel.SelectedPort))
+                {
+                    MessageBox.Show("COM11 is not available!");
+                    return;
+                }
+
+                SerialPortViewModel.BaudRate = 9600;
+                SerialPortViewModel.Parity = Parity.None;
+                SerialPortViewModel.DataBits = 8;
+                SerialPortViewModel.StopBits = StopBits.One;
+
+                SerialPortViewModel.OpenPortCommand.Execute(null);
+                MessageBox.Show("Port Opened Successfully!");
+
+                var runItem = ToolbarItems.FirstOrDefault(x => x.Tooltip.Contains("Run"));
+                if (runItem != null)
+                {
+                    runItem.Icon = PackIconKind.Stop;
+                }
+
+                RunIcon = PackIconKind.Stop;
+                OnPropertyChanged(nameof(RunIcon));
+            }
+            else
+            {
+                MessageBox.Show("SerialPortViewModel is not initialized!");
+            }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 
 }
