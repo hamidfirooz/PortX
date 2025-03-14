@@ -31,17 +31,21 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="5"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-
-                <GroupBox Grid.Row="0" Header="Send Sequens" Margin="10">
+                <GroupBox Grid.Row="0" Header="Send Data" Margin="10">
                     <!-- محتوای GroupBox اول -->
                 </GroupBox>
                 <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="5" />
-                <GroupBox Grid.Row="2" Header="Recive Sequens" Margin="10">
+                <GroupBox Grid.Row="2" Header="Send Sequens" Margin="10">
+                    <!-- محتوای GroupBox اول -->
+                </GroupBox>
+                <GridSplitter Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="5" />
+                <GroupBox Grid.Row="4" Header="Recive Sequens" Margin="10">
                     <!-- محتوای GroupBox دوم -->
                 </GroupBox>
-
             </Grid>
 
             <!-- GridSplitter بین دو ستون -->

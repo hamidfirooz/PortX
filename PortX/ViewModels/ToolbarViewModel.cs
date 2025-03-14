@@ -69,7 +69,7 @@ namespace PortX.ViewModels
         {
             if (e.PropertyName == nameof(SerialPortViewModel.IsPortOpen))
             {
-                RunIcon = SerialPortViewModel.IsPortOpen ? PackIconKind.Stop : PackIconKind.Play;
+                RunIcon = SerialPortViewModel.IsPortOpen ? PackIconKind.Play : PackIconKind.Stop;
                 OnPropertyChanged(nameof(RunIcon)); // اطلاع به UI
             }
             else if (e.PropertyName == nameof(SerialPortViewModel.ReceivedData))
@@ -100,7 +100,6 @@ namespace PortX.ViewModels
                 SerialPortViewModel.StopBits = StopBits.One;
 
                 SerialPortViewModel.OpenPortCommand.Execute(null);
-                MessageBox.Show("Port Opened Successfully!");
 
                 var runItem = ToolbarItems.FirstOrDefault(x => x.Tooltip.Contains("Run"));
                 if (runItem != null)
@@ -113,7 +112,15 @@ namespace PortX.ViewModels
             }
             else
             {
-                MessageBox.Show("SerialPortViewModel is not initialized!");
+                
+                var runItem = ToolbarItems.FirstOrDefault(x => x.Tooltip.Contains("Run"));
+                if (runItem != null)
+                {
+                    runItem.Icon = PackIconKind.Play;
+                }
+                SerialPortViewModel.ClosePortCommand.Execute(null);
+                RunIcon = PackIconKind.Play;
+                OnPropertyChanged(nameof(RunIcon));
             }
         }
 
