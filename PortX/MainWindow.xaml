@@ -21,23 +21,38 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" MinWidth="300"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*" MinWidth="200"/>
             </Grid.ColumnDefinitions>
 
             <!-- Grid اول برای GroupBox های Send و Recive -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*" MinHeight="100"/>
                     <RowDefinition Height="5"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*" MinHeight="100"/>
                     <RowDefinition Height="5"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*" MinHeight="100"/>
                 </Grid.RowDefinitions>
                 <GroupBox Grid.Row="0" Header="Send Data" Margin="10">
-                    <!-- محتوای GroupBox اول -->
+                    <StackPanel Orientation="Vertical" Margin="5">
+                        <DockPanel Margin="10" LastChildFill="True">
+                            <Button x:Name="btnSend" Content="Send" Height="30" Width="80" DockPanel.Dock="Right"/>
+                            <TextBox x:Name="txtSendData" Height="30"
+                                materialDesign:HintAssist.Hint="Enter data..." />
+                        </DockPanel>
+
+
+                        <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
+                            <CheckBox x:Name="chkHexMode" Content="Hex Mode" />
+                            <CheckBox x:Name="chkCR" Content="CR (Carriage Return)" Margin="10,0,0,0"/>
+                            <CheckBox x:Name="chkLF" Content="LF (Line Feed)" Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                    </StackPanel>
                 </GroupBox>
+
                 <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="5" />
                 <GroupBox Grid.Row="2" Header="Send Sequens" Margin="10">
                     <!-- محتوای GroupBox اول -->
