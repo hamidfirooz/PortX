@@ -27,7 +27,7 @@ Steps
 
 Clone the repository:
 
-git clone https://github.com/yourusername/yourproject.git
+git clone (https://github.com/hamidfirooz/PortX.git)
 
 Open the project in Visual Studio.
 
